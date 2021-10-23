@@ -5,10 +5,15 @@
 #include "gpio_init.h"
 #include "helper_functions.h"
 
-
+/**
+ * Prototype of functions
+ */
 void button_pressed();
 void display_figure(float);
 
+/**
+ * Main Function which contains the while loop which will run continuously in the calculator
+ */
 int main()
 {
 	init_platform();
@@ -33,11 +38,13 @@ int main()
 	while (1)
 	{
 		display_figure(counter);
+		// making a reading of each button
 		pushBtnLeftIn = XGpio_DiscreteRead(&P_BTN_LEFT, 1);
 		pushBtnRightIn = XGpio_DiscreteRead(&P_BTN_RIGHT, 1);
 		pushBtnUpIn = XGpio_DiscreteRead(&P_BTN_UP, 1);
 		pushBtnDownIn = XGpio_DiscreteRead(&P_BTN_DOWN, 1);
 
+		// state machine function to perform an action
 		button_pressed();
 	}
 

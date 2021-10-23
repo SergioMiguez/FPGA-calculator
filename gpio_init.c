@@ -1,5 +1,8 @@
 #include "gpio_init.h"
 
+/**
+ * Function to initialise all the GPIOs that the project is using.
+ */
 XStatus initGpio(void)
 {
 	XStatus status;

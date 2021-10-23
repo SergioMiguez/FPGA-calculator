@@ -3,14 +3,26 @@
 #include "seg7_display.h"	// Added for 7-segment definitions
 #include "gpio_init.h"
 
+// Variable to indicate if a digit has been displayed
 u8 digitDisplayed = FALSE;
+// Array of the digits that will be displayed
 u8 digits[4];
+// Variable to indicate the total number of digits that must be displayed
 u8 numOfDigits;
+// Variable to store the number that is currently being displayed
 u8 digitToDisplay;
+// Variable to indicate the number that is currently being displayed
 u8 digitNumber;
 
+/**
+ * Prototype of functions used from math.h
+ */
 float fmodf(float, float);
 
+/**
+ * Initial function used to display a given number into the display
+ * This function will handle the calculation of the digits and if it can be displayed
+ */
 void displayNumber(float number)
 {
 	u8 count;
@@ -59,6 +71,9 @@ void displayNumber(float number)
 	}
 }
 
+/**
+ * Function used to calculate the digits that must be displayed individually.
+ */
 void calculateDigits(float number)
 {
 	u8 fourthDigit;
@@ -99,6 +114,7 @@ void calculateDigits(float number)
 			firstDigit = 0;
 
 		} else {
+			// if it is a float value
 			numOfDigits = 4;
 
 			fourthDigit = fmodf(number * 10, 10);
@@ -119,6 +135,7 @@ void calculateDigits(float number)
 			secondDigit  = 0;
 			firstDigit = 0;
 		} else {
+			// if it is a float value
 			numOfDigits = 3;
 
 			fourthDigit = fmodf(number * 10 , 10);
@@ -138,6 +155,7 @@ void calculateDigits(float number)
 			secondDigit = 0;
 			firstDigit = 0;
 		} else {
+			// if it is a float value
 			numOfDigits = 2;
 
 			fourthDigit = fmodf(number * 10 , 10);
@@ -157,6 +175,7 @@ void calculateDigits(float number)
 			secondDigit = 0;
 			firstDigit = 0;
 		} else {
+			// if it is a float value
 			numOfDigits = 3;
 
 			fourthDigit = fmodf(-number * 10 , 10);
@@ -174,6 +193,7 @@ void calculateDigits(float number)
 			secondDigit = NUMBER_DASH;
 			firstDigit = 0;
 		} else {
+			// if it is a float value
 			numOfDigits = 4;
 
 			fourthDigit = fmodf(-number * 10 , 10);
@@ -200,6 +220,9 @@ void calculateDigits(float number)
 	return;
 }
 
+/**
+ * Function to finally display the previously calculated digits into the display
+ */
 void displayDigit()
 {
 	/*

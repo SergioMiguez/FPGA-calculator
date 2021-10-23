@@ -18,6 +18,7 @@
 #define DIGIT_DASH  	0xBF
 #define DIGIT_DOT		0x7F
 
+// Definitions for 7-segment BCD codes for values with dot included
 #define DIGIT_ZERO_DOT	0x40
 #define DIGIT_ONE_DOT	0x79
 #define DIGIT_TWO_DOT	0x24

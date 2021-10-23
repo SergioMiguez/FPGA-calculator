@@ -2,31 +2,49 @@
 #include "stdio.h"
 #include "math.h"
 
+/**
+ * Prototype of functions used from math.h
+ */
 double exp (double);
 float fmodf(float, float);
 
+/**
+ * Prototype of functions used from helper_function.h
+ */
 int get_number_1();
 int get_number_2();
 int get_opcode();
 
+/**
+ * Function to calculate the sum between two numbers
+ */
 float adder (float augend, float addend) {
 	float sum;
 	sum = augend + addend;
 	return sum;
 }
 
+/**
+ * Function to calculate the subtraction between two numbers
+ */
 float subtractor(float minuend, float subtrahend) {
 	float difference;
 	difference = minuend - subtrahend;
 	return difference;
 }
 
+/**
+ * Function to calculate the multiplication between two numbers
+ */
 float multiplicator (float multiplicand, float multiplier){
 	float multiplication;
 	multiplication = multiplicand * multiplier;
 	return multiplication;
 }
 
+/**
+ * Function to calculate the division between two numbers
+ */
 float divider (float dividend, float divisor){
 	float division;
 	if (divisor == 0){
@@ -38,30 +56,42 @@ float divider (float dividend, float divisor){
 	return division;
 }
 
+/**
+ * Function to calculate the modulo between two numbers
+ */
 float modulator (float dividend, float divisor) {
 	float module;
 	module = fmodf(dividend, divisor);
 	return module;
 }
 
+/**
+ * Function to calculate the power between two numbers
+ */
 float power (float base, float exponent) {
 	float sol;
 	sol = pow(base, exponent);
 	return sol;
 }
 
+/**
+ * Function to calculate the exponential of a value
+ */
 float exponential (float exponent) {
 	float sol;
 	sol = exp(exponent);
 	return sol;
 }
 
+/**
+ * Function to select the operation to be done depending on the value of the opcode.
+ * Case 1 is save to active arrow buttons and cases 8 and 12 are saved to display input figures.
+ */
 float calculate(int opcode, float num1, float num2){
 	float result = 0;
 	switch(opcode) {
 		case 0 :
 			result = -9999;
-			xil_printf("The printing inputs\n");
 			break;
 		case 8 :
 			result = get_number_1();
@@ -71,7 +101,6 @@ float calculate(int opcode, float num1, float num2){
 			break;
 		case 1 :
 			result = -9999;
-			xil_printf("Change buttons and shift to sides\n");
 			break;
 		case 2 :
 			result = adder(num1, num2);
@@ -159,7 +188,7 @@ float calculate(int opcode, float num1, float num2){
 			result = atanh(num1);
 			break;
 		default:
-			//xil_printf("Error! The operation type (%c) is wrong!\n\r", opcode);
+			xil_printf("Error! The operation type (%c) is wrong!\n\r", opcode);
 			break;
 	}
 	return result;
