@@ -122,10 +122,5 @@ int get_number_1(void);
  * Switches 11 – 15.
  */
 int get_number_2(void);
-/**
- * Declaration of function prototypes contained in arith_operations.c
- */
-float calculate(int, float, float);
-
 
 #endif /* MAIN_STRUCTURE__H_ */

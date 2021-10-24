@@ -3,14 +3,6 @@
 #include "seg7_display.h"
 
 
-
-/**
- * Prototype functions used from main_structure.h
- */
-int get_number_1(void);
-int get_number_2(void);
-int get_opcode(void);
-
 /**
  * Interrupt function which adds functionalities of the calculator.
  */
