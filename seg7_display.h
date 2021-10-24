@@ -2,6 +2,11 @@
 #define __SEG7_DISPLAY_H_
 
 #include "xgpio.h"		// Added for xgpio object definitions
+#include "gpio_init.h"
+#include "main_structure.h"
+#include <stdio.h>
+#include "xil_types.h"		// Added for integer type definitions
+#include "math.h"
 
 // Definitions for 7-segment BCD codes
 #define DIGIT_BLANK		0xFF
@@ -42,12 +47,49 @@
 #define EN_THIRD_SEG	0b1101
 #define EN_FOURTH_SEG	0b1110
 
-void print(char *str);
+// Definitions to turn on LEDs on SHIFT or CHAIN mode
+#define CHAIN_OPERATION 0b0000111111000000
+#define SHIFT_ON 0b1111000000000000
 
+/**
+ * Prototype function to print strings.
+ */
+void print(char *str);
+/**
+ * Prototype function from xinterruptES3.c.
+ */
 int setUpInterruptSystem();
+/**
+ * Prototype function from timer_interrupt_func.c.
+ */
 void hwTimerISR(void *CallbackRef);
+/**
+ * Function used to handle and try to display the given number.
+ */
 void displayNumber(float number);
+/**
+ * Function used to calculate the digits that must be displayed individually.
+ */
 void calculateDigits(float number);
+/**
+ * Function to finally display the previously calculated digits into the display.
+ */
 void displayDigit();
+/**
+ * Function to calculate the number of digits that value has.
+ */
+int number_of_figures(int);
+/**
+ * Function to crop and display correctly the numbers depending on their properties
+ */
+void display_figure(float);
+/**
+ * Function to crop the number with the correct digits to be displayed
+ */
+float float_crop_value(float);
+/**
+ * Function to crop the number with the correct digits to be displayed.
+ */
+int int_crop_value(float);
 
 #endif

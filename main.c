@@ -3,16 +3,19 @@
 #include "xil_types.h"		// Added for integer type definitions
 //#include "seg7_display.h"	// Added for 7-segment definitions
 #include "gpio_init.h"
-#include "helper_functions.h"
+#include "main_structure.h"
 
 /**
- * Prototype of functions
+ * Prototype of functions of main_structure.h
  */
 void button_pressed();
+/**
+ * Prototype of functions of seg7_display.h
+ */
 void display_figure(float);
 
 /**
- * Main Function which contains the while loop which will run continuously in the calculator
+ * Main Function which contains the while loop which will run the calculator project continuously
  */
 int main()
 {

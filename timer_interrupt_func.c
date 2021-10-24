@@ -1,15 +1,18 @@
-#include "helper_functions.h"
+#include "main_structure.h"
 #include "gpio_init.h"
+#include "seg7_display.h"
+
+
 
 /**
- * Prototype of functions used from helper_function.h
+ * Prototype functions used from main_structure.h
  */
-int get_number_1();
-int get_number_2();
-int get_opcode();
+int get_number_1(void);
+int get_number_2(void);
+int get_opcode(void);
 
 /**
- * Interrupt function which contains some of the functionalities of the calculator
+ * Interrupt function which adds functionalities of the calculator.
  */
 void hwTimerISR(void *CallbackRef)
 {
@@ -21,14 +24,14 @@ void hwTimerISR(void *CallbackRef)
 	 * LEDs of NUMBER_1 as this number will be changed with the previous calculation value
 	 */
 	if (use_value_next_calculation_flag != 0){
-		slideSwitchIn = slideSwitchIn | 0b0000111111000000;
+		slideSwitchIn = slideSwitchIn | CHAIN_OPERATION;
 	}
 	/**
 	 * if the SHIFT button has been pressed, then the opcode switches LEDs will turn on to indicate that the
 	 * SHIFT mode is ON
 	 */
 	if (shift_flag == 1){
-		slideSwitchIn = slideSwitchIn | 0b1111000000000000;
+		slideSwitchIn = slideSwitchIn | SHIFT_ON;
 	}
 	XGpio_DiscreteWrite(&LED_OUT, 1, slideSwitchIn);
 

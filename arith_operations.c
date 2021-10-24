@@ -1,19 +1,6 @@
-#include "xil_types.h"
-#include "stdio.h"
-#include "math.h"
+#include "arith_operations.h"
 
-/**
- * Prototype of functions used from math.h
- */
-double exp (double);
-float fmodf(float, float);
 
-/**
- * Prototype of functions used from helper_function.h
- */
-int get_number_1();
-int get_number_2();
-int get_opcode();
 
 /**
  * Function to calculate the sum between two numbers
@@ -23,7 +10,6 @@ float adder (float augend, float addend) {
 	sum = augend + addend;
 	return sum;
 }
-
 /**
  * Function to calculate the subtraction between two numbers
  */
@@ -32,7 +18,6 @@ float subtractor(float minuend, float subtrahend) {
 	difference = minuend - subtrahend;
 	return difference;
 }
-
 /**
  * Function to calculate the multiplication between two numbers
  */
@@ -41,7 +26,6 @@ float multiplicator (float multiplicand, float multiplier){
 	multiplication = multiplicand * multiplier;
 	return multiplication;
 }
-
 /**
  * Function to calculate the division between two numbers
  */
@@ -52,10 +36,8 @@ float divider (float dividend, float divisor){
 	} else {
 		division = dividend / divisor;
 	}
-
 	return division;
 }
-
 /**
  * Function to calculate the modulo between two numbers
  */
@@ -64,7 +46,6 @@ float modulator (float dividend, float divisor) {
 	module = fmodf(dividend, divisor);
 	return module;
 }
-
 /**
  * Function to calculate the power between two numbers
  */
@@ -73,7 +54,14 @@ float power (float base, float exponent) {
 	sol = pow(base, exponent);
 	return sol;
 }
-
+/**
+ * Function to calculate the square root of a number
+ */
+float square_root (float number) {
+	float sol;
+	sol = sqrt(number);
+	return sol;
+}
 /**
  * Function to calculate the exponential of a value
  */
@@ -82,10 +70,9 @@ float exponential (float exponent) {
 	sol = exp(exponent);
 	return sol;
 }
-
 /**
  * Function to select the operation to be done depending on the value of the opcode.
- * Case 1 is save to active arrow buttons and cases 8 and 12 are saved to display input figures.
+ * Case 1 is saved to activate arrow buttons and cases 8 and 12 are saved to display input figures.
  */
 float calculate(int opcode, float num1, float num2){
 	float result = 0;
@@ -131,7 +118,7 @@ float calculate(int opcode, float num1, float num2){
 			//xil_printf(" The exponential result is: %d\n\r", result);
 			break;
 		case 10 :
-			result = sqrt(num1);
+			result = square_root(num1);
 			break;
 		case 11 :
 			result = sin(num1);
@@ -193,4 +180,11 @@ float calculate(int opcode, float num1, float num2){
 	}
 	return result;
 }
-
+/**
+ * Function to convert the input value into 2s complements to let the user input
+ * negative and positive values.
+ */
+int convert_to_twos_complement(unsigned int num){
+	num = (-pow(2,6)) + ((int)(num << 1) >> 1);
+	return num;
+}

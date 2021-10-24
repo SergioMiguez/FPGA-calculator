@@ -55,10 +55,10 @@
 *		|      |-.        |      |-32        Last INTC
 *		|      |-.        |      |-.          ______
 *		|______|<--31-----|      |-.         |      |-64
-*			          |      |-.         |      |-.
-*			          |______|<--63------|      |-.
-*                                                    |      |-.
-*                                                    |______|-95
+*			         	  |      |-.         |      |-.
+*			          	  |______|<--63------|      |-.
+*                                            |      |-.
+*                                            |______|-95
 *
 *		All driver functions has to be called using
 *		DeviceId/InstancePtr of Primary/Master Controller only. Driver

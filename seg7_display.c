@@ -1,23 +1,17 @@
-#include <stdio.h>
-#include "xil_types.h"		// Added for integer type definitions
 #include "seg7_display.h"	// Added for 7-segment definitions
-#include "gpio_init.h"
 
-// Variable to indicate if a digit has been displayed
+
+// Variable to indicate if a digit has been displayed.
 u8 digitDisplayed = FALSE;
-// Array of the digits that will be displayed
+// Array of the digits that will be displayed.
 u8 digits[4];
-// Variable to indicate the total number of digits that must be displayed
+// Variable to indicate the total number of digits that must be displayed.
 u8 numOfDigits;
-// Variable to store the number that is currently being displayed
+// Variable to store the number that is currently being displayed.
 u8 digitToDisplay;
-// Variable to indicate the number that is currently being displayed
+// Variable to indicate the position of the number that is currently being displayed.
 u8 digitNumber;
 
-/**
- * Prototype of functions used from math.h
- */
-float fmodf(float, float);
 
 /**
  * Initial function used to display a given number into the display
@@ -70,7 +64,6 @@ void displayNumber(float number)
 		}
 	}
 }
-
 /**
  * Function used to calculate the digits that must be displayed individually.
  */
@@ -219,7 +212,6 @@ void calculateDigits(float number)
 
 	return;
 }
-
 /**
  * Function to finally display the previously calculated digits into the display
  */
@@ -316,4 +308,33 @@ void displayDigit()
 
 	digitDisplayed = TRUE;
 	return;
+}
+/**
+ * Function to calculate the number of digits a value has
+ */
+int number_of_figures (int n) {
+    if (n == 0) return 1;
+    return floor (log10 ((int)fabsf (n))) + 1;
+}
+/**
+ * Function to crop and display correctly the numbers depending on their properties
+ */
+void display_figure(float num){
+	if (num < 0 || fmodf(num,1) != 0){
+		displayNumber(float_crop_value(num));
+	} else {
+		displayNumber(int_crop_value(num));
+	}
+}
+/**
+ * Function to crop the number with the correct digits to be displayed
+ */
+float float_crop_value(float num){
+	return fmodf(num / pow(10, digit_displayed_reference), 10000);
+}
+/**
+ * Function to crop the number with the correct digits to be displayed.
+ */
+int int_crop_value(float num){
+	return (int) (fmodf(num / pow(10, digit_displayed_reference), 10000));
 }
